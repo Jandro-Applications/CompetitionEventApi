@@ -77,7 +77,12 @@ namespace CompetitionEventApi.Controllers
             return View();
         }
 
-        public IActionResult Scores()
+        public IActionResult Scoring()
+        {
+            return View();
+        }
+
+        public IActionResult Results()
         {
             return View();
         }
