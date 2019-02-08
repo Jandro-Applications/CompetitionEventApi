@@ -12,6 +12,16 @@ using Microsoft.EntityFrameworkCore;
 using CompetitionEventApi.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CompetitionEventApi.Services;
+using CompetitionEventApi.Services.Interfaces;
+using CompetitionEventApi.Services.Services;
+using CompetitionEventApi.Models;
+using CompetitionEventApi.Services.DataObjects;
+using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CompetitionEventApi
 {
@@ -37,10 +47,47 @@ namespace CompetitionEventApi
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<CompetitionApiDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddScoped<IContestantService, ContestantService>();
+            services.AddScoped<ICompetitionEventService, CompetitionEventService>();
+            services.AddScoped<ICompetitionScoreService, CompetitionScoreService>();
+            services.AddScoped<ICompetitionService, CompetitionService>();
+            services.AddScoped<IPostService, PostService>();
+
+            services.AddCors(o => o.AddPolicy("ApiPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CompetitionViewModel, Competition>();
+                cfg.CreateMap<PostViewModel, Post>();
+                cfg.CreateMap<RelatedEventCompetition, RelatedEventCompetitionViewModel>();
+                cfg.CreateMap<CompetitionEvent, CompetitionEventViewModel>()
+                    .ForMember(x => x.RelatedCompetitionIds, opt => opt.Ignore());
+
+                cfg.CreateMap<CompetitionEventViewModel, CompetitionEvent>();
+
+                cfg.CreateMap<CompetitionApplicationViewModel, CompetitionApplication>();
+                cfg.CreateMap<CompetitionScoreViewModel, CompetitionScore>();
+                cfg.CreateMap<CompetitionViewModel, Competition>();
+                cfg.CreateMap<ContestantViewModel, Contestant>();
+            });
+
+            IMapper mapper = config.CreateMapper();
+
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +100,7 @@ namespace CompetitionEventApi
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Amk/Error");
                 app.UseHsts();
             }
 
@@ -63,11 +110,13 @@ namespace CompetitionEventApi
 
             app.UseAuthentication();
 
+            app.UseCors("ApiPolicy");
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Amk}/{action=Index}/{id?}");
             });
         }
     }

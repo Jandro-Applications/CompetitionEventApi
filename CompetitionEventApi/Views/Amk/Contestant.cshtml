@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "Contestant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="app">
+    <div class="contestants">
+        <h1>{{title}}</h1>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <form>
+                    <div class="form-group">
+                        <label for="firstName">Ime natjecatelja</label>
+                        <input type="text" v-model="contestant.firstName" class="form-control" id="firstName" placeholder="Unesite ime natjecatelja">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Prezime natjecatelja</label>
+                        <input type="text" v-model="contestant.lastName" class="form-control" id="lastName" placeholder="Unesite prezime natjecatelja">
+                    </div>
+                    <div class="form-group">
+                        <label for="uniqueId">Registracija</label>
+                        <input type="text" v-model="contestant.uniqueId" class="form-control" id="uniqueId" placeholder="Unesite registraciju">
+                    </div>
+                    <div class="form-group">
+                        <label for="club">Klub</label>
+                        <input type="text" v-model="contestant.clubName" class="form-control" id="club" placeholder="Unesite klub ako je član">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-ddl">Status</label>
+                        <select class="form-control" id="event-ddl" v-model="contestant.status">
+                            <option value="1">Aktivan</option>
+                            <option value="2">Neaktivan</option>
+                            <option value="3">Obrisan</option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" v-model="contestant.paid" class="form-check-input" id="paid">
+                        <label for="paid" class="form-check-label">Plaćeno natjecanje?</label>
+                    </div>
+                    <button class="btn btn-success" v-on:click.prevent="saveContestant">Spremi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        name: 'ContestantDetails',
+        el:'#app',
+        data() {
+            return {
+                title: 'Natjecatelj',
+                contestant: {}
+            }
+        },
+        created() {
+
+            axios.get('https://localhost:44345/api/contestants/' + getUrlVars()["id"])
+                .then(response => {
+                    this.contestant = response.data
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        },
+        methods: {
+            saveContestant: function () {
+
+                axios({
+                    method: 'post',
+                    url: 'https://localhost:44345/api/contestants/',
+                    data: this.contestant
+                })
+                    .then(response => { })
+                    .catch(e => {
+                        console.log(e)
+                    })
+            }
+        }
+    })
+</script>
+
+<style scoped>
+</style>

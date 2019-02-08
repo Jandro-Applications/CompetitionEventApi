@@ -13,6 +13,6 @@ namespace CompetitionEventApi.Services.DataObjects
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public virtual ICollection<Competition> Competitions { get; set; }
+        public virtual ICollection<RelatedEventCompetition> RelatedEventCompetitions { get; set; }
     }
 }

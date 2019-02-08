@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "CompetitionEvent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="app">
+    <div class="events">
+        <router-view></router-view>
+        <h1>{{title}}</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Naziv</td>
+                    <td>Početak</td>
+                    <td>Kraj</td>
+                    <td>Status</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-bind:key="index" v-for="(competitionEvent,index) in competitionEvents">
+                    <td>{{competitionEvent.id}}</td>
+                    <td>{{competitionEvent.title}}</td>
+                    <td>{{competitionEvent.startDate}}</td>
+                    <td>{{competitionEvent.endDate}}</td>
+                    <td>{{competitionEvent.status}}</td>
+                    <td>
+                        <a v-bind:href="'/amk/competitionevent?id='+ competitionEvent.id" type="button" class="btn btn-default">Detalji</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        router: new VueRouter({}),
+        data() {
+            return {
+                title: 'Pregled dodađaja',
+                competitionEvents: []
+            }
+        },
+        created() {
+            axios.get('https://localhost:44345/api/competitionevents')
+                .then(response => {
+                    this.competitionEvents = response.data
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        },
+        methods: {
+            details: function (id) {
+                this.$route.push({ name: 'event-details', params: { id: id } })
+            }
+        }
+    });
+</script>

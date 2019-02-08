@@ -9,6 +9,22 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
+    <script>
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -17,42 +33,64 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-inverse sidebar" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">CompetitionEventApi</a>
+                <a asp-area="" asp-controller="Amk" asp-action="Index" class="navbar-brand">CompetitionEventApi</a>
             </div>
-            <div class="navbar-collapse collapse">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Natjecatelji<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-asterisk"></span></a>
+                        <ul class="dropdown-menu forAnimate" role="menu">
+                            <li><a asp-controller="Amk" asp-action="contestants">Lista</a></li>
+                            <li><a asp-controller="Amk" asp-action="newcontestant">Novi natjecatelj</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rezultati<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-asterisk"></span></a>
+                        <ul class="dropdown-menu forAnimate" role="menu">
+                            <li><a asp-controller="Amk" asp-action="scores">Trenutni rezultati</a></li>
+                            <li><a asp-controller="Amk" asp-action="newcompetition">Ocjenjivanje</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Natjecanje<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-asterisk"></span></a>
+                        <ul class="dropdown-menu forAnimate" role="menu">
+                            <li><a asp-controller="Amk" asp-action="competitions">Lista</a></li>
+                            @*<li><a asp-controller="Amk" asp-action="newcompetition">Novo natjecanje</a></li>*@
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Događaj <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-asterisk"></span></a>
+                        <ul class="dropdown-menu forAnimate" role="menu">
+                            <li><a asp-controller="Amk" asp-action="competitionevents">Lista</a></li>
+                            @*<li><a asp-controller="Amk" asp-action="newcompetitionevent">Novi događaj</a></li>*@
+                        </ul>
+                    </li>
+                    <partial name="_LoginPartial" />
                 </ul>
-                <partial name="_LoginPartial" />
+                
             </div>
         </div>
     </nav>
-
     <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
+    <div class="main">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - CompetitionEventApi</p>
-        </footer>
     </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
@@ -69,7 +107,6 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>

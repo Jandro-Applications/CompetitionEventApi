@@ -8,11 +8,13 @@ namespace CompetitionEventApi.Services.DataObjects
 {
     public class Competition : BaseEntity
     {
-        public int CompetitionEventId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public int NumberOfRounds { get; set; }
+        public decimal MaxScore { get; set; }
+        public int RelatedCompetitionId { get; set; }
 
+        public virtual ICollection<RelatedEventCompetition> RelatedEventCompetitions { get; set; }
         public virtual ICollection<CompetitionApplication> CompetitionApplications { get; set; }
-        public virtual CompetitionEvent CompetitionEvent { get; set; }
     }
 }
