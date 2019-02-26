@@ -20,12 +20,36 @@ namespace CompetitionEventApi.Services.Services
 
         public List<CompetitionScore> GetAll()
         {
-            return _context.CompetitionScore.ToList();
+            return _context.CompetitionScore
+                    .Include(x=>x.Competition)
+                    .Include(x => x.CompetitionApplication)
+                    .Include(x => x.CompetitionApplication.Contestant)
+                    .ToList();
+        }
+
+        public List<CompetitionScore> GetByCompetitionApplicationId(int competitionApplicationId)
+        {
+            return _context.CompetitionScore
+                    .Where(x=> x.CompetitionApplication.Id == competitionApplicationId)
+                    .Include(y=> y.Competition)
+                    .ToList();
         }
 
         public CompetitionScore GetById(int id)
         {
             return _context.CompetitionScore.FirstOrDefault(x => x.Id == id);
+        }
+
+        public bool CheckIfExists(int competitionId, int competitionApplicationId)
+        {
+            var score = _context.CompetitionScore.Where(x => x.Competition.Id == competitionId && x.CompetitionApplication.Id == competitionApplicationId);
+
+            if(score != null)
+            {
+                return score?.Count() > 0;
+            }
+
+            return false;
         }
 
         public bool Save(CompetitionScore competitionScore)

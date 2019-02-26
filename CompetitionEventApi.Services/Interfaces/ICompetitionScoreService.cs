@@ -11,6 +11,8 @@ namespace CompetitionEventApi.Services.Interfaces
     {
         List<CompetitionScore> GetAll();
         CompetitionScore GetById(int id);
+        List<CompetitionScore> GetByCompetitionApplicationId(int competitionApplicationId);
+        bool CheckIfExists(int competitionId, int competitionApplicationId);
         bool Save(CompetitionScore post);
     }
 }

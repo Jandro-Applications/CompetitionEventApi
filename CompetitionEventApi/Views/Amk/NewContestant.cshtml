@@ -4,5 +4,96 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>NewContestant</h2>
+<div id="app">
+    <div class="contestants">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <h1>{{title}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-1">
+                <form>
+                    <div class="form-group">
+                        <label for="firstName">Ime natjecatelja</label>
+                        <input type="text" class="form-control" v-model="contestant.FirstName" id="firstName" placeholder="Unesite ime natjecatelja">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Prezime natjecatelja</label>
+                        <input type="text" class="form-control" v-model="contestant.LastName" id="lastName" placeholder="Unesite prezime natjecatelja">
+                    </div>
+                    <div class="form-group">
+                        <label for="uniqueId">Registracija</label>
+                        <input type="text" class="form-control" v-model="contestant.UniqueId" id="uniqueId" placeholder="Unesite registraciju">
+                    </div>
+                    <div class="form-group">
+                        <label for="club">Klub</label>
+                        <input type="text" class="form-control" v-model="contestant.ClubName" id="club" placeholder="Unesite klub ako je član">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-ddl">Status</label>
+                        <select class="form-control" id="event-ddl">
+                            <option value="1">Aktivan</option>
+                            <option value="2">Neaktivan</option>
+                            <option value="3">Obrisan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-ddl">Odaberite natjecanja</label>
+                        <br />
+                        <span v-bind:key="index" v-for="(c,index) in competitions">
+                            <input type="checkbox" v-bind:value="c.id" v-model="relatedCompetitionIds">{{c.title}}
+                            <br />
+                        </span>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="paid">
+                        <label for="paid" class="form-check-label">Plaćeno natjecanje?</label>
+                    </div>
+                    <button class="btn btn-success" v-on:click.prevent="saveContestant">Spremi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+
+    var app = new Vue({
+        name: 'NewContestant',
+        el: '#app',
+        data() {
+            return {
+                title: 'Novi natjecatelj',
+                contestant: {},
+                relatedCompetitionIds: [],
+                competitions: [
+                    { id: 1, title: 'Style' },
+                    { id: 2, title: 'Db' },
+                    { id: 3, title: 'Car limbo' },
+                    { id: 4, title: 'Lowest car' },
+                    { id: 5, title: 'Intake' },
+                    { id: 6, title: 'Exhaust' }
+                ]
+            }
+        },
+        methods: {
+            saveContestant: function () {
+
+                this.contestant.RelatedCompetitionIds = this.relatedCompetitionIds
+
+                axios({
+                    method: 'post',
+                    url: 'http://show.amkbilogora.hr/api/contestants/',
+                    data: this.contestant
+                })
+                    .then(response => {
+                        window.location = "/";
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    })
+            }
+        }
+    })
+</script>

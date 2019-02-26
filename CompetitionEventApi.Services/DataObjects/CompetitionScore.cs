@@ -15,6 +15,7 @@ namespace CompetitionEventApi.Services.DataObjects
         public decimal Round5 { get; set; }
         public decimal FinalScore { get; set; }
 
+        public Competition Competition { get; set; }
         public CompetitionApplication CompetitionApplication { get; set; }
     }
 }

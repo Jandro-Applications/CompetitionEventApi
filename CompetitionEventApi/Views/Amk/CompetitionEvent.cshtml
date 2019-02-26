@@ -62,7 +62,7 @@
             }
         },
         created() {
-            axios.get('https://localhost:44345/api/competitions')
+            axios.get('http://show.amkbilogora.hr/api/competitions')
                 .then(response => {
                     this.allCompetitions = response.data
                 })
@@ -70,7 +70,7 @@
                     console.log(e)
                 })
 
-            axios.get('https://localhost:44345/api/competitionEvents/' + getUrlVars()["id"])
+            axios.get('http://show.amkbilogora.hr/api/competitionEvents/' + getUrlVars()["id"])
                 .then(response => {
                     this.competitionEvent = response.data
                 })
@@ -84,7 +84,7 @@
                 this.competitionEvent.relatedCompetitionIds = this.checkedCompetitions;
                 axios({
                     method: 'post',
-                    url: 'https://localhost:44345/api/competitionEvents/',
+                    url: 'http://show.amkbilogora.hr/api/competitionEvents/',
                     data: this.competitionEvent
                 })
                     .then(response => { })

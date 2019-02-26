@@ -50,7 +50,7 @@ var app = new Vue({
     }
   },
   created () {
-    axios.get('https://localhost:44345/api/contestants')
+    axios.get('http://show.amkbilogora.hr/api/contestants')
       .then(response => {
         this.contestants = response.data
       })

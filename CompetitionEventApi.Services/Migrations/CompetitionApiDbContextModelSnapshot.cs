@@ -104,6 +104,8 @@ namespace CompetitionEventApi.Services.Migrations
 
                     b.Property<int?>("CompetitionApplicationId");
 
+                    b.Property<int?>("CompetitionId");
+
                     b.Property<DateTime>("DateCreated");
 
                     b.Property<DateTime>("DateModified");
@@ -125,6 +127,8 @@ namespace CompetitionEventApi.Services.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompetitionApplicationId");
+
+                    b.HasIndex("CompetitionId");
 
                     b.ToTable("CompetitionScore");
                 });
@@ -226,6 +230,10 @@ namespace CompetitionEventApi.Services.Migrations
                     b.HasOne("CompetitionEventApi.Services.DataObjects.CompetitionApplication", "CompetitionApplication")
                         .WithMany("CompetitionScores")
                         .HasForeignKey("CompetitionApplicationId");
+
+                    b.HasOne("CompetitionEventApi.Services.DataObjects.Competition", "Competition")
+                        .WithMany()
+                        .HasForeignKey("CompetitionId");
                 });
 
             modelBuilder.Entity("CompetitionEventApi.Services.DataObjects.RelatedEventCompetition", b =>

@@ -22,17 +22,20 @@ namespace CompetitionEventApi.Controllers
         private readonly ICompetitionEventService _competitionEventService;
         private readonly ICompetitionService _competitionService;
         private readonly IMapper _mapper;
+        private readonly ICompetitionApplicationService _competitionApplicationService;
 
         public ContestantsController(
             IContestantService contestantService,
             ICompetitionEventService competitionEventService,
             ICompetitionService competitionService,
-            IMapper mapper)
+            IMapper mapper,
+            ICompetitionApplicationService competitionApplicationService)
         {
             _contestantService = contestantService;
             _competitionEventService = competitionEventService;
             _mapper = mapper;
             _competitionService = competitionService;
+            _competitionApplicationService = competitionApplicationService;
         }
 
 
@@ -71,7 +74,24 @@ namespace CompetitionEventApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            _contestantService.Save(_mapper.Map<Contestant>(contestantViewModel));
+            var contestant = _mapper.Map<Contestant>(contestantViewModel);
+
+            if (_contestantService.Save(contestant))
+            {
+                foreach (var item in contestantViewModel.RelatedCompetitionIds)
+                {
+                    var competition = _competitionService.GetById(item);
+
+                    var competitionApplication = new CompetitionApplication
+                    {
+                        Contestant = contestant,
+                        Competition = competition
+                    };
+
+                    _competitionApplicationService.Save(competitionApplication);
+                }
+
+            }
 
             return new JsonResult(contestantViewModel);
         }

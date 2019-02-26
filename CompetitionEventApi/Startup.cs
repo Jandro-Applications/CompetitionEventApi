@@ -59,6 +59,7 @@ namespace CompetitionEventApi
             services.AddScoped<ICompetitionScoreService, CompetitionScoreService>();
             services.AddScoped<ICompetitionService, CompetitionService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<ICompetitionApplicationService, CompetitionApplicationService>();
 
             services.AddCors(o => o.AddPolicy("ApiPolicy", builder =>
             {
@@ -80,9 +81,25 @@ namespace CompetitionEventApi
                 cfg.CreateMap<CompetitionEventViewModel, CompetitionEvent>();
 
                 cfg.CreateMap<CompetitionApplicationViewModel, CompetitionApplication>();
-                cfg.CreateMap<CompetitionScoreViewModel, CompetitionScore>();
+
                 cfg.CreateMap<CompetitionViewModel, Competition>();
+
+                cfg.CreateMap<Contestant, ContestantViewModel>()
+                    .ForMember(x => x.RelatedCompetitionIds, opt => opt.Ignore());
+
                 cfg.CreateMap<ContestantViewModel, Contestant>();
+
+                cfg.CreateMap<CompetitionScore, CompetitionScoreViewModel>()
+                    .ForMember(x => x.CompetitionId, opt =>
+                        opt.MapFrom(y => y.Competition.Id))
+                    .ForMember(x => x.CompetitionApplicationId, opt =>
+                        opt.MapFrom(y => y.CompetitionApplication.Id))
+                    .ForMember(x => x.CompetitionName, opt =>
+                        opt.MapFrom(y => y.Competition.Title))
+                    .ForMember(x => x.FirstAndLastName, opt =>
+                        opt.MapFrom(y => y.CompetitionApplication.Contestant.FirstName + y.CompetitionApplication.Contestant.FirstName))
+                    .ForMember(x => x.Registration, opt =>
+                        opt.MapFrom(y => y.CompetitionApplication.Contestant.UniqueId));
             });
 
             IMapper mapper = config.CreateMapper();

@@ -154,6 +154,10 @@
     <Compile Include="Migrations\20190127093927_clubname.designer.cs">
       <DependentUpon>20190127093927_clubname.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190224120904_competitionscoreCompetition.cs" />
+    <Compile Include="Migrations\20190224120904_competitionscoreCompetition.designer.cs">
+      <DependentUpon>20190224120904_competitionscoreCompetition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\CompetitionApiDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CompetitionApplicationService.cs" />

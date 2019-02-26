@@ -20,12 +20,15 @@ namespace CompetitionEventApi.Services.Services
 
         public List<CompetitionApplication> GetAll()
         {
-            return _context.CompetitionApplication.ToList();
+            return _context.CompetitionApplication.Include( x => x.Contestant).Include( y => y.Competition).ToList();
         }
 
         public CompetitionApplication GetById(int id)
         {
-            return _context.CompetitionApplication.FirstOrDefault(x => x.Id == id);
+            return _context.CompetitionApplication
+                            .Include(x => x.Contestant)
+                            .Include(y => y.Competition)
+                            .FirstOrDefault(x => x.Id == id);
         }
 
         public bool Save(CompetitionApplication competitionApplication)

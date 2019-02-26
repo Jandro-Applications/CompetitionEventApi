@@ -47,7 +47,7 @@
             }
         },
         created() {
-            axios.get('https://localhost:44345/api/competitionevents')
+            axios.get('http://show.amkbilogora.hr/api/competitionevents')
                 .then(response => {
                     this.competitionEvents = response.data
                 })

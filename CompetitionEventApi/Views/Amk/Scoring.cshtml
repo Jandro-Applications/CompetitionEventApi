@@ -1,8 +1,120 @@
 ﻿
 @{
-    ViewData["Title"] = "Scoreing";
+    ViewData["Title"] = "Scoring";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Scoreing</h2>
+<div id="app">
+    <div class="contestants">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <h1>{{title}}</h1>
+            </div>
+        </div>
+        <div class="row push-top-20">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" v-model="regex" placeholder="Pretraži..." class="form-control" id="regex">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <select v-model="selected" class="form-control">
+                        <option v-for="option in headCompetitions" v-bind:value="option.id">
+                            {{ option.title }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row push-top-20">
+            <table class="table table-bordered table-striped push-top-20">
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Ime</td>
+                        <td>Prezime</td>
+                        <td>Registracija auta</td>
+                        <td>Natjecanje</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-bind:key="index" v-for="(competitionApplication,index) in competitionApplications">
+                        <td>{{competitionApplication.id}}</td>
+                        <td>{{competitionApplication.contestant.firstName}}</td>
+                        <td>{{competitionApplication.contestant.lastName}}</td>
+                        <td>{{competitionApplication.contestant.uniqueId}}</td>
+                        <td>{{competitionApplication.competition.title}}</td>
+                        <td>
+                            <a v-bind:href="'/amk/score?Id='+ competitionApplication.id" type="button" class="btn btn-default">Ocijeni</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
+<script>
+    var app = new Vue({
+        name: 'Scoring',
+        el: '#app',
+        data() {
+            return {
+                selected: 1,
+                selectedMinor: 0,
+                title: 'Ocjenjivanje',
+                competitions: [],
+                minorCompetitions: [],
+                competitionApplications: [],
+                regex: ''
+            }
+        },
+        computed: {
+            headCompetitions: function () {
+                var competitionsFiltered = [];
+
+                competitionsFiltered = this.competitions.filter(function (item) {
+                    return item.relatedCompetitionId == 0;
+                })
+
+                return competitionsFiltered;
+            },
+            minorCompetitions: function () {
+
+            }
+        },
+        created() {
+
+            axios.get('http://show.amkbilogora.hr/api/competitions')
+                .then(response => {
+                    this.competitions = response.data
+                })
+                .catch(e => {
+                    console.log(e)
+                });
+
+            axios.get('http://show.amkbilogora.hr/api/competitionaplications')
+                .then(response => {
+                    this.competitionApplications = response.data
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                });
+        },
+        methods: {
+            onHeadCompetitionChange: function (e) {
+                var competitionsFiltered = [];
+
+                competitionsFiltered = this.competitions.filter(function (item) {
+                    return item.relatedCompetitionId == app.selected;
+                })
+
+                this.minorCompetitions = competitionsFiltered;
+            }
+        }
+    })
+</script>

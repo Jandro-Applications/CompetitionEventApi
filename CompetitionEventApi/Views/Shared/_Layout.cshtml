@@ -1,14 +1,15 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CompetitionEventApi</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
     <script>
         function getUrlVars() {
             var vars = [], hash;
@@ -25,12 +26,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
 </head>
 <body>
     <nav class="navbar navbar-inverse sidebar" role="navigation">
@@ -46,40 +41,19 @@
                 <a asp-area="" asp-controller="Amk" asp-action="Index" class="navbar-brand">CompetitionEventApi</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Natjecatelji<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-asterisk"></span></a>
-                        <ul class="dropdown-menu forAnimate" role="menu">
-                            <li><a asp-controller="Amk" asp-action="contestants">Lista</a></li>
-                            <li><a asp-controller="Amk" asp-action="newcontestant">Novi natjecatelj</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rezultati<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-asterisk"></span></a>
-                        <ul class="dropdown-menu forAnimate" role="menu">
-                            <li><a asp-controller="Amk" asp-action="results">Trenutni rezultati</a></li>
-                            <li><a asp-controller="Amk" asp-action="scoring">Ocjenjivanje</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Natjecanje<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-asterisk"></span></a>
-                        <ul class="dropdown-menu forAnimate" role="menu">
-                            <li><a asp-controller="Amk" asp-action="competitions">Lista</a></li>
-                            @*<li><a asp-controller="Amk" asp-action="newcompetition">Novo natjecanje</a></li>*@
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Događaj <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-asterisk"></span></a>
-                        <ul class="dropdown-menu forAnimate" role="menu">
-                            <li><a asp-controller="Amk" asp-action="competitionevents">Lista</a></li>
-                            @*<li><a asp-controller="Amk" asp-action="newcompetitionevent">Novi događaj</a></li>*@
-                        </ul>
-                    </li>
-                    <partial name="_LoginPartial" />
-                </ul>
-                
-            </div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-controller="Amk" asp-action="scoring">Ocjenjivanje</a></li>
+                        <li><a asp-controller="Amk" asp-action="results">Trenutni rezultati</a></li>
+                        <li><a asp-controller="Amk" asp-action="newcontestant">Novi natjecatelj</a></li>
+                        <li><a asp-controller="Amk" asp-action="contestants">Lista natjecatelja</a></li>
+                        <partial name="_LoginPartial" />
+                    </ul>
+
+                </div>
+            }
         </div>
     </nav>
     <partial name="_CookieConsentPartial" />
@@ -87,26 +61,22 @@
         @RenderBody()
     </div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+    </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+    </script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

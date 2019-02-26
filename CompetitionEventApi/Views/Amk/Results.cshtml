@@ -4,5 +4,94 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Results</h2>
 
+@{
+    ViewData["Title"] = "Scoring";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="app">
+    <div class="contestants">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <h1>{{title}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <select v-model="selected" class="form-control" @@change="onHeadCompetitionChange($event)">
+                    <option v-for="option in competitions" v-bind:value="option.id">
+                        {{ option.title }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row push-top-20">
+            <div class="col-md-4">
+                <table class="table table-bordered table-striped push-top-20">
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Ime i prezime</td>
+                            <td>Registracija</td>
+                            <td>Rezultat</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-bind:key="index" v-for="(score,index) in filteredScores">
+                            <td>{{index + 1}}</td>
+                            <td>{{score.firstAndLastName}}</td>
+                            <td>{{score.registration}}</td>
+                            <td>{{score.finalScore}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        name: 'Results',
+        el: '#app',
+        data() {
+            return {
+                selected: 1,
+                title: 'Rezultati',
+                competitions: [],
+                scores: [],
+                filteredScores:[]
+            }
+        },
+        created() {
+            axios.get('http://show.amkbilogora.hr/api/scores')
+                .then(response => {
+                    this.scores = response.data;
+                    var selectedOption = this.selected;
+                    this.filteredScores = this.scores.filter(function (e) {
+                        return e.competitionId == selectedOption;
+                    });
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+
+            axios.get('http://show.amkbilogora.hr/api/competitions')
+                .then(response => {
+                    this.competitions = response.data
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        },
+        methods: {
+            onHeadCompetitionChange: function (e) {
+                var selectedOption = this.selected;
+                this.filteredScores = this.scores.filter(function (e) {
+                    return e.competitionId == selectedOption;
+                });
+            }
+        }
+    })
+</script>
