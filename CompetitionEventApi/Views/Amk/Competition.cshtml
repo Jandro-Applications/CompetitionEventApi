@@ -65,7 +65,7 @@ var app = new Vue({
     }
   },
   created () {
-    axios.get('http://show.amkbilogora.hr/api/competitions')
+    axios.get(_siteUrl + 'api/competitions')
       .then(response => {
         this.allCompetitions = response.data
       })

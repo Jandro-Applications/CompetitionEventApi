@@ -31,6 +31,14 @@
                         <input type="text" class="form-control" v-model="contestant.ClubName" id="club" placeholder="Unesite klub ako je član">
                     </div>
                     <div class="form-group">
+                        <label for="mail">E-mail</label>
+                        <input type="text" class="form-control" v-model="contestant.Email" id="mail" placeholder="Mail za kontakt">
+                    </div>
+                    <div class="form-group">
+                        <label for="mob">Mobitel</label>
+                        <input type="text" class="form-control" v-model="contestant.Mob" id="mob" placeholder="Mobitel">
+                    </div>
+                    <div class="form-group">
                         <label for="event-ddl">Status</label>
                         <select class="form-control" id="event-ddl">
                             <option value="1">Aktivan</option>
@@ -84,7 +92,7 @@
 
                 axios({
                     method: 'post',
-                    url: 'http://show.amkbilogora.hr/api/contestants/',
+                    url: _siteUrl + 'api/contestants/',
                     data: this.contestant
                 })
                     .then(response => {

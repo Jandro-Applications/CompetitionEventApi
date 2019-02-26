@@ -24,6 +24,8 @@ namespace CompetitionEventApi.Models
         public string Country { get; set; }
         public string UniqueId { get; set; }
         public string ClubName { get; set; }
+        public string Email { get; set; }
+        public string Mob { get; set; }
 
         public int[] RelatedCompetitionIds { get; set; }
     }

@@ -85,14 +85,14 @@
         },
         created() {
 
-            axios.get('http://show.amkbilogora.hr/api/scores/' + getUrlVars()["Id"])
+            axios.get(_siteUrl + 'api/scores/' + getUrlVars()["Id"])
                 .then(response => {
                     this.competitionScores = response.data.competitionScores;
 
                     var mainComeptitionId = response.data.mainCompetitionId
                     this.mainCompetitionId = mainComeptitionId;
 
-                    axios.get('http://show.amkbilogora.hr/api/competitions')
+                    axios.get(_siteUrl + 'api/competitions')
                         .then(response => {
                             if (mainComeptitionId == 1 || mainComeptitionId == 2) {
                                 this.competitions = response.data.filter(function (e) {
@@ -146,7 +146,7 @@
 
                 axios({
                     method: 'post',
-                    url: 'http://show.amkbilogora.hr/api/scores/',
+                    url: _siteUrl + 'api/scores/',
                     data: saveModel
                 }).then(response => {
                     this.msg = "Spremljeno";

@@ -16,7 +16,7 @@
                 <div class="col-md-6">
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <input type="text" v-model="regex" placeholder="Pretraži..." class="form-control" id="regex">
+                            <input type="text" v-model="regex" placeholder="Pretraži..." v-on:keyup="search" class="form-control" id="regex">
                         </div>
                     </div>
                 </div>
@@ -70,6 +70,7 @@
                 competitions: [],
                 minorCompetitions: [],
                 competitionApplications: [],
+                competitionApplicationsOriginal:[],
                 regex: ''
             }
         },
@@ -89,7 +90,7 @@
         },
         created() {
 
-            axios.get('http://show.amkbilogora.hr/api/competitions')
+            axios.get(_siteUrl + 'api/competitions')
                 .then(response => {
                     this.competitions = response.data
                 })
@@ -97,9 +98,10 @@
                     console.log(e)
                 });
 
-            axios.get('http://show.amkbilogora.hr/api/competitionaplications')
+            axios.get(_siteUrl + 'api/competitionaplications')
                 .then(response => {
-                    this.competitionApplications = response.data
+                    this.competitionApplications = response.data;
+                    this.competitionApplicationsOriginal = response.data;
                 })
                 .catch(e => {
                     this.errors.push(e)
@@ -114,6 +116,20 @@
                 })
 
                 this.minorCompetitions = competitionsFiltered;
+            },
+            search: function () {
+
+                var substr = this.regex;
+
+                var searchedApps = this.competitionApplicationsOriginal.filter(function (e) {
+
+                  
+                    return (e.contestant.firstName.toLowerCase().indexOf(substr) !== -1) || (e.contestant.lastName.toLowerCase().indexOf(substr) !== -1) || (e.contestant.uniqueId.toLowerCase().indexOf(substr) !== -1)
+
+                });
+
+                this.competitionApplications = searchedApps;
+                
             }
         }
     })
