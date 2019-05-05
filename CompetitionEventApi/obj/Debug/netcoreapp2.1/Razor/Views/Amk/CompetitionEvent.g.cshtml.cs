@@ -58,7 +58,7 @@ using CompetitionEventApi.Models;
             WriteLiteral("<div id=\"app\">\r\n    <div class=\"events\">\r\n        <h1>{{title}}</h1>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-6 col-md-offset-3\">\r\n                ");
             EndContext();
             BeginContext(165, 2297, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "45222eb2732b43a395f72afe5acafb24", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4683de3e4ac04b17a3d4da1ff2e57316", async() => {
                 BeginContext(171, 1485, true);
                 WriteLiteral(@"
                     <div class=""form-group"">
@@ -84,7 +84,7 @@ using CompetitionEventApi.Models;
                             ");
                 EndContext();
                 BeginContext(1656, 34, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6cfb3a1c105b4428bbc139464a7f01a8", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "55621dd5464e41499920b2250314c3cc", async() => {
                     BeginContext(1674, 7, true);
                     WriteLiteral("Aktivan");
                     EndContext();
@@ -106,7 +106,7 @@ using CompetitionEventApi.Models;
                 WriteLiteral("\r\n                            ");
                 EndContext();
                 BeginContext(1720, 36, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14410d842e77496ca4823277c09196fc", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "05f175ee1e1642869d78475fbb0df1a2", async() => {
                     BeginContext(1738, 9, true);
                     WriteLiteral("Neaktivan");
                     EndContext();
@@ -128,7 +128,7 @@ using CompetitionEventApi.Models;
                 WriteLiteral("\r\n                            ");
                 EndContext();
                 BeginContext(1786, 34, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7db1f7d43aaa4872a4871e2cc5769f94", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fccba3ce34604a5db14cfd4b8648a7a0", async() => {
                     BeginContext(1804, 7, true);
                     WriteLiteral("Obrisan");
                     EndContext();

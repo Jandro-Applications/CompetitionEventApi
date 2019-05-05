@@ -11,7 +11,8 @@ namespace CompetitionEventApi.Services.Services
 {
     public class CompetitionApplicationService : ICompetitionApplicationService
     {
-        CompetitionApiDbContext _context;
+        private readonly CompetitionApiDbContext _context;
+
 
         public CompetitionApplicationService(CompetitionApiDbContext competitionApiDbContext)
         {

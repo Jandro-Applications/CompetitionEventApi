@@ -51,7 +51,10 @@ namespace CompetitionEventApi
             services.AddDbContext<CompetitionApiDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services
+                .AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                //.AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IContestantService, ContestantService>();
@@ -60,6 +63,7 @@ namespace CompetitionEventApi
             services.AddScoped<ICompetitionService, CompetitionService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICompetitionApplicationService, CompetitionApplicationService>();
+            services.AddScoped<IMailService,MailService>();
 
             services.AddCors(o => o.AddPolicy("ApiPolicy", builder =>
             {

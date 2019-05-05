@@ -16,6 +16,8 @@ namespace CompetitionEventApi.Models
     {
         public int CompetitionId { get; set; }
         public int CompetitionApplicationId { get; set; }
+        public decimal? Round1 { get; set; }
+        public decimal? Round2 { get; set; }
         public decimal Score{ get; set; }
     }
 }

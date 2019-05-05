@@ -23,19 +23,22 @@ namespace CompetitionEventApi.Controllers
         private readonly ICompetitionService _competitionService;
         private readonly IMapper _mapper;
         private readonly ICompetitionApplicationService _competitionApplicationService;
+        private readonly IMailService _mailService;
 
         public ContestantsController(
             IContestantService contestantService,
             ICompetitionEventService competitionEventService,
             ICompetitionService competitionService,
             IMapper mapper,
-            ICompetitionApplicationService competitionApplicationService)
+            ICompetitionApplicationService competitionApplicationService,
+            IMailService mailService)
         {
             _contestantService = contestantService;
             _competitionEventService = competitionEventService;
             _mapper = mapper;
             _competitionService = competitionService;
             _competitionApplicationService = competitionApplicationService;
+            _mailService = mailService;
         }
 
 
@@ -91,6 +94,9 @@ namespace CompetitionEventApi.Controllers
                     _competitionApplicationService.Save(competitionApplication);
                 }
 
+                string message = "Bok " + contestant.FirstName + " " + contestant.LastName + "!<br/><br/> Vaša prijava je zaprimljena te Vam je dodijeljen broj <b>#" + contestant.Id + "</b> <br/><br/> Hvala na prijavi i vidimo se!";
+
+                _mailService.SendMail(message, contestant.Email);
             }
 
             return new JsonResult(contestantViewModel);

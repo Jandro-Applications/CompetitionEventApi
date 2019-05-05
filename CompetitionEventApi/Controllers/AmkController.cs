@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using CompetitionEventApi.Models;
 using CompetitionEventApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CompetitionEventApi.Controllers
 {
@@ -18,7 +20,7 @@ namespace CompetitionEventApi.Controllers
         }
 
         public IActionResult Index()
-        {
+        {   
             return View();
         }
 

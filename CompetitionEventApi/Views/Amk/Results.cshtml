@@ -91,6 +91,10 @@
                 this.filteredScores = this.scores.filter(function (e) {
                     return e.competitionId == selectedOption;
                 });
+
+                if (selectedOption == 4) {
+                    this.filteredScores.reverse();
+                }
             }
         }
     })

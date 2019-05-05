@@ -133,6 +133,7 @@
     <Compile Include="Interfaces\ICompetitionScoreService.cs" />
     <Compile Include="Interfaces\ICompetitionService.cs" />
     <Compile Include="Interfaces\IContestantService.cs" />
+    <Compile Include="Interfaces\IMailService.cs" />
     <Compile Include="Interfaces\IPostService.cs" />
     <Compile Include="Migrations\20190112211830_First.cs" />
     <Compile Include="Migrations\20190112211830_First.designer.cs">
@@ -169,6 +170,7 @@
     <Compile Include="Services\CompetitionScoreService.cs" />
     <Compile Include="Services\CompetitionService.cs" />
     <Compile Include="Services\ContestantService.cs" />
+    <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\PostService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -35,7 +35,7 @@ namespace CompetitionEventApi.Controllers
         [HttpGet]
         public IEnumerable<CompetitionScoreViewModel> GetScores()
         {
-            var competitionApplicationScores = _competitionScoreService.GetAll();
+            var competitionApplicationScores = _competitionScoreService.GetAll().OrderByDescending(o => o.FinalScore);
 
             return _mapper.Map<List<CompetitionScoreViewModel>>(competitionApplicationScores);
         }
@@ -85,15 +85,40 @@ namespace CompetitionEventApi.Controllers
 
                 competitionScore = compAppScores.FirstOrDefault(x => x.Competition.Id == scoreSaveViewModel.CompetitionId);
 
-                competitionScore.FinalScore = scoreSaveViewModel.Score;
+                if(competitionScore.Competition.RelatedCompetitionId == 1)
+                {
+                    var round1 = scoreSaveViewModel.Round1 ?? 0m;
+                    var round2 = scoreSaveViewModel.Round2 ?? 0m;
+
+                    competitionScore.FinalScore = round1 + round2;
+                }
+                else
+                {
+                    competitionScore.FinalScore = scoreSaveViewModel.Score;
+                }
             }
             else
             {
+                decimal finalScore = 0m;
+                var competition = _competitionService.GetById(scoreSaveViewModel.CompetitionId);
+
+                if (competition.RelatedCompetitionId == 1)
+                {
+                    var round1 = scoreSaveViewModel.Round1 ?? 0m;
+                    var round2 = scoreSaveViewModel.Round2 ?? 0m;
+
+                    finalScore = round1 + round2;
+                }
+                else
+                {
+                    finalScore = scoreSaveViewModel.Score;
+                }
+
                 competitionScore = new CompetitionScore
                 {
                     CompetitionApplication = _competitionApplicationService.GetById(scoreSaveViewModel.CompetitionApplicationId),
-                    Competition = _competitionService.GetById(scoreSaveViewModel.CompetitionId),
-                    FinalScore = scoreSaveViewModel.Score,
+                    Competition = competition,
+                    FinalScore = finalScore,
                     Status = Status.Active
                 };
             }
