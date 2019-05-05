@@ -145,7 +145,6 @@ D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\bin\Debug\System.In
 D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\bin\Debug\System.Memory.xml
 D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\bin\Debug\System.Numerics.Vectors.xml
 D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\obj\Debug\CompetitionEventApi.Services.csprojAssemblyReference.cache
 D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\obj\Debug\CompetitionEventApi.Services.csproj.CoreCompileInputs.cache
 D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\obj\Debug\CompetitionEventApi.Services.csproj.CopyComplete
 D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\obj\Debug\CompetitionEventApi.Services.dll
