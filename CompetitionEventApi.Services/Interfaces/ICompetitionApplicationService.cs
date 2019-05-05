@@ -12,5 +12,6 @@ namespace CompetitionEventApi.Services.Interfaces
         List<CompetitionApplication> GetAll();
         CompetitionApplication GetById(int id);
         bool Save(CompetitionApplication post);
+        bool Done(int id);
     }
 }

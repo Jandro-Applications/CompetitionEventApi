@@ -33,8 +33,8 @@
                             <td>{{competitionScore.competitionName}}</td>
                             <td>{{competitionScore.finalScore}}</td>
                             @*<td>
-                        <button type="button" class="btn btn-default">Spremi</button>
-                    </td>*@
+                                    <button type="button" class="btn btn-default">Spremi</button>
+                                </td>*@
                         </tr>
                     </tbody>
                 </table>
@@ -67,6 +67,11 @@
                         <button type="button" class="btn btn-primary" v-on:click.prevent="save">Spremi</button>
                     </div>
                 </div>
+                <div class="form-group row ">
+                    <div class="col-sm-10 push-top-10">
+                        <button type="button" class="btn btn-warning" v-on:click.prevent="done">Gotovo!</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -85,7 +90,7 @@
                 scoreSaveViewModel: {},
                 competitions: [],
                 msg: '',
-                error:false
+                error: false
             }
         },
         created() {
@@ -121,6 +126,20 @@
                     .catch(e => {
                         console.log(e)
                     });
+            },
+            done: function () {
+
+                axios({
+                    method: 'put',
+                    url: _siteUrl + 'api/scores/' + getUrlVars()["Id"]
+                }).then(response => {
+                    this.msg = "Gotovo";
+                    this.error = false;
+                    window.location.href = "/Amk/scoring";
+                })
+                    .catch(e => {
+                        console.log(e)
+                    })
             },
             save: function () {
 
@@ -164,9 +183,9 @@
                     this.error = false;
                     this.load();
                 })
-                .catch(e => {
-                    console.log(e)
-                })
+                    .catch(e => {
+                        console.log(e)
+                    })
             }
         }
     })

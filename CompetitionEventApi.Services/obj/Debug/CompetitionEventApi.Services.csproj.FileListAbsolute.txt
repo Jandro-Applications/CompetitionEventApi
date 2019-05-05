@@ -149,3 +149,4 @@ D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\obj\Debug\Competiti
 D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\obj\Debug\CompetitionEventApi.Services.csproj.CopyComplete
 D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\obj\Debug\CompetitionEventApi.Services.dll
 D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\obj\Debug\CompetitionEventApi.Services.pdb
+D:\Projects\CompetitionEventApi\CompetitionEventApi.Services\obj\Debug\CompetitionEventApi.Services.csprojAssemblyReference.cache

@@ -21,7 +21,7 @@ namespace CompetitionEventApi.Services.Services
 
         public List<CompetitionApplication> GetAll()
         {
-            return _context.CompetitionApplication.Include( x => x.Contestant).Include( y => y.Competition).ToList();
+            return _context.CompetitionApplication.Include( x => x.Contestant).Include( y => y.Competition).Where(s => s.Status == Status.Active).ToList();
         }
 
         public CompetitionApplication GetById(int id)
@@ -46,6 +46,27 @@ namespace CompetitionEventApi.Services.Services
                 competitionApplication.DateModified = DateTime.Now;
 
                 _context.CompetitionApplication.Add(competitionApplication);
+            }
+
+            try
+            {
+                return _context.SaveChanges() > 0;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return false;
+            }
+        }
+
+        public bool Done(int id)
+        {
+            var competitionApplication = _context.CompetitionApplication.Find(id);
+
+            if (competitionApplication.Id > 0)
+            {
+                competitionApplication.Status = Status.Finished;
+                competitionApplication.DateModified = DateTime.Now;
+                _context.Entry(competitionApplication).State = EntityState.Modified;
             }
 
             try

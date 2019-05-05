@@ -69,6 +69,15 @@ namespace CompetitionEventApi.Controllers
             return Ok(model);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult PostCompetitionScoreDone(int id)
+        {
+            _competitionApplicationService.Done(id);
+
+            return Ok();
+        }
+
+
         [HttpPost]
         public IActionResult PostCompetitionScore([FromBody] ScoreSaveViewModel scoreSaveViewModel)
         {
