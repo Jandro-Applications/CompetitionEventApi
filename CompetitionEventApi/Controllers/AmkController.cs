@@ -94,6 +94,11 @@ namespace CompetitionEventApi.Controllers
             return View();
         }
 
+        public IActionResult Sajam()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

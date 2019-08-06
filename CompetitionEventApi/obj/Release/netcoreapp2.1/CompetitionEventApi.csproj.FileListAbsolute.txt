@@ -78,3 +78,4 @@ D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Release\netcoreapp2.1\Co
 D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Release\netcoreapp2.1\CompetitionEventApi.csproj.CopyComplete
 D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Release\netcoreapp2.1\CompetitionEventApi.dll
 D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Release\netcoreapp2.1\CompetitionEventApi.pdb
+D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Release\netcoreapp2.1\Razor\Views\Amk\Sajam.g.cshtml.cs

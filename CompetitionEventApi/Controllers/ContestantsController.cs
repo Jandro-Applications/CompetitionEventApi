@@ -81,6 +81,7 @@ namespace CompetitionEventApi.Controllers
 
             if (_contestantService.Save(contestant))
             {
+                string comeptitionNames = "";
                 foreach (var item in contestantViewModel.RelatedCompetitionIds)
                 {
                     var competition = _competitionService.GetById(item);
@@ -91,10 +92,18 @@ namespace CompetitionEventApi.Controllers
                         Competition = competition
                     };
 
+                    comeptitionNames += competition.Title + "<br/>";
+
                     _competitionApplicationService.Save(competitionApplication);
                 }
 
-                string message = "Bok " + contestant.FirstName + " " + contestant.LastName + "!<br/><br/> Vaša prijava je zaprimljena te Vam je dodijeljen broj <b>#" + contestant.Id + "</b> <br/><br/> Hvala na prijavi i vidimo se!";
+                string message = "Bok " + contestant.FirstName + " " + contestant.LastName
+                                    + "!<br/><br/> Vaša prijava je zaprimljena te Vam je dodijeljen broj <b>#"
+                                    + contestant.Id
+                                    + "</b> <br/><br/> Molimo Vas da ovaj mail sa brojem čuvate kao potvrdu za drugi dio prijava(check-in) na samom natjecanju"
+                                    + "<br/><br/> Prijavljena natjecanja: <br/>" + comeptitionNames + "<br/>"
+                                    + "<br/><br/>"
+                                    + "Hvala na prijavi i vidimo se!";
 
                 _mailService.SendMail(message, contestant.Email);
             }

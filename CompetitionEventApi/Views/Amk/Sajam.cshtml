@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Sajam";
+}
+<style>
+    span{
+        font-size:12px;
+    }
+    body{
+        max-height:700px;
+    }
+    html{
+        max-height:700px;
+    }
+</style>
+<div style="width:219px !important; height:793px !important;display:block;" id="print">
+    <div style="margin-left:auto;margin-right:auto;">
+        <h4>Auto – moto klub Bilogora</h4>
+        <b>SAJAM AUTOMOBILA GUDOVAC</b>
+    </div>
+    <br />
+    <span>OIB: 01825869468</span><br />
+    <span>E-mail: amk.whitehill@gmail.com</span><br />
+    <span>Adresa: Trojstveni Markovac, Trojstvena ulica 85,43000 Bjelovar</span><br />
+    <span>Kontakt br.: 091/246 – 4000</span><br />
+
+    <br />
+    <b>DONACIJA GRAĐANA NA IZNOS:</b>
+    <b>10, 00 KN</b>
+    <br />
+    <br />
+    <b>SVE DONACIJE KORISTIMO ZA DOBROBIT KLUBA I ČLANOVA KLUBA.</b>
+
+    <br />
+    <br />
+    Broj ulaznice:  001
+    <br />
+    <br />
+    Ovlaštena osoba za zastupanje udruge: Dario Jandrašinčec
+    <br />
+    Pečat:
+    <br />
+    <img src="~/images/pecat.jpg" />
+    <br />
+    <br />
+    Hvala Vam na povjerenju.
+    Datum: @DateTime.UtcNow.ToString("dd.mm.yyyy H:mm:ss")
+</div>
+<button onclick="printDiv('print')">Print</button>
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        //var originalContents = document.body.innerHTML;
+
+        //document.body.innerHTML = printContents;
+
+        //window.print();
+
+        //document.body.innerHTML = originalContents;
+        var WinPrint = window.open('', '', 'left=0,top=0,width=230,height=400,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(printContents);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>

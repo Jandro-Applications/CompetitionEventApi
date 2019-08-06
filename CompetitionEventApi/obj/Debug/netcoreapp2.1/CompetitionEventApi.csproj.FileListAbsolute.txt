@@ -78,3 +78,4 @@ D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Debug\netcoreapp2.1\Razo
 D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Debug\netcoreapp2.1\Razor\Views\Amk\Scoring.g.cshtml.cs
 D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Debug\netcoreapp2.1\Razor\Views\Amk\Results.g.cshtml.cs
 D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Debug\netcoreapp2.1\Razor\Views\Amk\Score.g.cshtml.cs
+D:\Projects\CompetitionEventApi\CompetitionEventApi\obj\Debug\netcoreapp2.1\Razor\Views\Amk\Sajam.g.cshtml.cs
