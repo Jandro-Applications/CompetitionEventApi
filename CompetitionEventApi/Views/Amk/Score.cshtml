@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Score";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -21,20 +20,24 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            @*<td>Id</td>*@
+                            @*
+                            <td>Id</td>*@
                             <td>Natjecanje</td>
                             <td>Rezultat</td>
-                            @*<td></td>*@
+                            @*
+                            <td></td>*@
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-bind:key="index" v-for="(competitionScore,index) in competitionScores">
-                            @*<td>{{competitionScore.id}}</td>*@
+                            @*
+                            <td>{{competitionScore.id}}</td>*@
                             <td>{{competitionScore.competitionName}}</td>
                             <td>{{competitionScore.finalScore}}</td>
-                            @*<td>
-                                    <button type="button" class="btn btn-default">Spremi</button>
-                                </td>*@
+                            @*
+                            <td>
+                                <button type="button" class="btn btn-default">Spremi</button>
+                            </td>*@
                         </tr>
                     </tbody>
                 </table>
@@ -108,7 +111,7 @@
 
                         axios.get(_siteUrl + 'api/competitions')
                             .then(response => {
-                                if (mainComeptitionId == 1 || mainComeptitionId == 2) {
+                                if (mainComeptitionId == 1 || mainComeptitionId == 2 || mainComeptitionId == 4) {
                                     this.competitions = response.data.filter(function (e) {
                                         return e.relatedCompetitionId == mainComeptitionId;
                                     })
@@ -154,6 +157,21 @@
                     return (saveModel.CompetitionId == 7 || saveModel.CompetitionId == 8 || saveModel.CompetitionId == 9)
                         && (e.competitionId == 7 || e.competitionId == 8 || e.competitionId == 9); //begginer, pro, extreme
                 })
+
+                var chkMainCompScoreLow = this.competitionScores.filter(function (e) {
+                    return (saveModel.CompetitionId == 33 || saveModel.CompetitionId == 34 || saveModel.CompetitionId == 35)
+                        && (e.competitionId == 33 || e.competitionId == 34 || e.competitionId == 35);
+                })
+
+                if (chkMainCompScoreLow.length > 0) {
+                    this.msg = "Možeš odabrati samo jednu kategoriju za lowest";
+                    this.error = true;
+                    return;
+                } else {
+                    this.msg = "";
+                    this.error = false;
+                }
+
 
                 if (chkMainCompScore.length > 0) {
                     this.msg = "Možeš odabrati samo jednu nad-kategoriju";
