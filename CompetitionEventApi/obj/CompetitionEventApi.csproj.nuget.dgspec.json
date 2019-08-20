@@ -1,0 +1,96 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi\\CompetitionEventApi.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi.Services\\CompetitionEventApi.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi.Services\\CompetitionEventApi.Services.csproj",
+        "projectName": "CompetitionEventApi.Services",
+        "projectPath": "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi.Services\\CompetitionEventApi.Services.csproj"
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    },
+    "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi\\CompetitionEventApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi\\CompetitionEventApi.csproj",
+        "projectName": "CompetitionEventApi",
+        "projectPath": "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi\\CompetitionEventApi.csproj",
+        "packagesPath": "C:\\Users\\vedran.jandrasincec\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\vedran.jandrasincec\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "\\\\hrtfs05\\NuGetPackages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi.Services\\CompetitionEventApi.Services.csproj": {
+                "projectPath": "C:\\Users\\vedran.jandrasincec\\source\\repos\\Amk Bilogora\\CompetitionEventApi.Services\\CompetitionEventApi.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.1, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.6, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
