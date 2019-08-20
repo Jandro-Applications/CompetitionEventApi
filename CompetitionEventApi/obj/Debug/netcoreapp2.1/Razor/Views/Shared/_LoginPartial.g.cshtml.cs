@@ -76,12 +76,12 @@ using Microsoft.AspNetCore.Identity;
 #line default
 #line hidden
             BeginContext(181, 405, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b864af0874814924b511ca2d4cafaafa", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8c91b9f4f53d45da989770a5cbd71b28", async() => {
                 BeginContext(354, 16, true);
                 WriteLiteral("\r\n    \r\n    <li>");
                 EndContext();
                 BeginContext(370, 106, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "908d97a20c2c4eeb975dd7ca1e73038a", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6f6c656ffcd943828f7065ee745fb5f8", async() => {
                     BeginContext(442, 29, false);
 #line 10 "D:\Projects\CompetitionEventApi\CompetitionEventApi\Views\Shared\_LoginPartial.cshtml"
                                                                           Write(UserManager.GetUserName(User));

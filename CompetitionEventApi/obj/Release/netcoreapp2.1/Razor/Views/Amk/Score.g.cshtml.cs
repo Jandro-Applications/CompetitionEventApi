@@ -103,7 +103,7 @@ using CompetitionEventApi.Models;
                             ");
             EndContext();
             BeginContext(2022, 155, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7ef0928c4b3644dba54aa0283b87b10c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "44e6a30d81f041ea833430164173e434", async() => {
                 BeginContext(2086, 82, true);
                 WriteLiteral("\r\n                                {{ option.title }}\r\n                            ");
                 EndContext();

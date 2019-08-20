@@ -88,7 +88,7 @@ using CompetitionEventApi.Models;
             WriteLiteral("@change=\"onHeadCompetitionChange($event)\">\r\n                    ");
             EndContext();
             BeginContext(578, 139, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "acd79ccff11640b6ab91b9eb85349aa7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b90687a5374e447ba2c8d5a6a632f9b8", async() => {
                 BeginContext(642, 66, true);
                 WriteLiteral("\r\n                        {{ option.title }}\r\n                    ");
                 EndContext();
