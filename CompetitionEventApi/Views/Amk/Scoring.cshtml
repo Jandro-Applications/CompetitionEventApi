@@ -43,7 +43,7 @@
                 </thead>
                 <tbody>
                     <tr v-bind:key="index" v-for="(competitionApplication,index) in competitionApplications">
-                        <td>{{competitionApplication.id}}</td>
+                        <td>{{competitionApplication.contestant.id}}</td>
                         <td>{{competitionApplication.contestant.firstName}}</td>
                         <td>{{competitionApplication.contestant.lastName}}</td>
                         <td>{{competitionApplication.contestant.uniqueId}}</td>

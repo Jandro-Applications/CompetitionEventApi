@@ -79,7 +79,9 @@
 
             axios.get(_siteUrl + 'api/competitions')
                 .then(response => {
-                    this.competitions = response.data
+                    this.competitions = response.data.filter(function (i) {
+                        return (i.id != 1 && i.id != 2 && i.id != 4);
+                    })
                 })
                 .catch(e => {
                     console.log(e)
@@ -92,7 +94,7 @@
                     return e.competitionId == selectedOption;
                 });
 
-                if (selectedOption == 4 || selectedOption == 3 ) {
+                if (selectedOption == 4 || selectedOption == 3 || selectedOption == 33 || selectedOption == 34 || selectedOption == 35) {
                     this.filteredScores.reverse();
                 }
             }
